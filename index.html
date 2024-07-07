@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>  
+    <link rel="icon" href="https://n9.cl/w5ppz">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณภาษีรายได้ของอาชืพ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body style="background-color: blanchedalmond;">
+    <div class="container">
+        <h1>คำนวณภาษีรายได้ของอาชืพ</h1>
+        </select>
+        <label for="income">รายได้ต่อปี (บาท):</label>
+        <input type="number" id="income" placeholder="กรุณาใส่รายได้ต่อปีของคุณ">
+        <button onclick="calculateTax()">คำนวณภาษี</button>
+        <h2 id="result"></h2>
+    </div>
+    <script>
+        function calculateTax() {
+            var profession = document.getElementById('profession').value;
+            var income = parseFloat(document.getElementById('income').value);
+            var tax = 0;
+
+            // การคำนวณภาษีพื้นฐานสำหรับทุกอาชีพ
+            if (income <= 150000) {
+                tax = 0;
+            } else if (income <= 300000) {
+                tax = (income - 150000) * 0.05;
+            } else if (income <= 500000) {
+                tax = (income - 300000) * 0.10 + 7500;
+            } else if (income <= 750000) {
+                tax = (income - 500000) * 0.15 + 27500;
+            } else if (income <= 1000000) {
+                tax = (income - 750000) * 0.20 + 65000;
+            } else if (income <= 2000000) {
+                tax = (income - 1000000) * 0.25 + 115000;
+            } else if (income <= 5000000) {
+                tax = (income - 2000000) * 0.30 + 365000;
+            } else {
+                tax = (income - 5000000) * 0.35 + 1265000;
+            }
+
+            // เพิ่มการคำนวณภาษีสำหรับอาชีพพิเศษ (ถ้ามี)
+            switch(profession) {
+                case 'teacher':
+                    // คำนวณภาษีสำหรับครู
+                    // ภาษีอาจจะต่ำกว่าหรือมีสิทธิพิเศษ
+                    break;
+                case 'police':
+                    // คำนวณภาษีสำหรับตำรวจ
+                    break;
+                case 'military':
+                    // คำนวณภาษีสำหรับทหาร
+                    break;
+                case 'freelancer':
+                    // คำนวณภาษีสำหรับฟรีแลนซ์
+                    break;
+                // เพิ่มกรณีสำหรับอาชีพอื่น ๆ ที่ต้องการ
+            }
+
+            document.getElementById('result').innerHTML = 'ภาษีที่ต้องจ่าย: ' + tax.toFixed(2) + ' บาท';
+        }
+    </script>
+</body>
+</html>
